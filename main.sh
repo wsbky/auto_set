@@ -1,36 +1,37 @@
 #!/bin/bash
 
-# # system info
-# sysname=$(uname -m)
+# system info
+sysname=$(uname -m)
 
-# if [ $sysname = "x86_64" ]; then
-#     BREW_HOME="/usr/local/"
-# elif [ $sysname = "arm64"]; then
-#     BREW_HOME="/opt/homebrew"
-# else
-#     echo "This program is not supported on ${sysname}"
-#     return 1
-# fi
+if [ $sysname = "x86_64" ]; then
+    BREW_HOME="/usr/local/"
+elif [ $sysname = "arm64"]; then
+    BREW_HOME="/opt/homebrew"
+else
+    echo "This program is not supported on ${sysname}"
+    return 1
+fi
 
-# # install command line developer tools
-# xcode-select --install
+# install command line developer tools
+xcode-select --install
 
-# # install homebrew
-# if !(type "brew" > /dev/null 2>&1); then
-#     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-# fi
+# install homebrew
+if !(type "brew" > /dev/null 2>&1); then
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
 
-# # change shell to homebrew zsh
-# read -p "Change Shell to Homebrew zsh? (y/n)" Answer < /dev/tty
-# case ${Answer} in
-#     y|Y)
-#         brew install zsh
-#         sudo -S -- sh -c "echo "${BREW_HOME}/bin/zsh" >> /etc/shells"
-#         chsh -s $BREW_HOME/bin/zsh
-#         ;;
-#     *)
-#         echo "skipped";;
-# esac
+# change shell to homebrew zsh
+read -p "Change Shell to Homebrew zsh? (y/n)" Answer </dev/tty
+case ${Answer} in
+y | Y)
+    brew install zsh
+    sudo -S -- sh -c "echo "${BREW_HOME}/bin/zsh" >> /etc/shells"
+    chsh -s $BREW_HOME/bin/zsh
+    ;;
+*)
+    echo "skipped"
+    ;;
+esac
 
 # backup current config files
 mkdir $HOME/BACKUP
@@ -56,6 +57,7 @@ echo 'setopt EXTENDED_GLOB'
 echo 'for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do'
 echo 'ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"'
 echo 'done'
+echo 'source $ZDOTDIR/.zshrc'
 echo "----------------------------------"
 
 # path for homebrew
