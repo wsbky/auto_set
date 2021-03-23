@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/zsh
 
 # # system info
 # sysname=$(uname -m)
@@ -32,26 +32,25 @@
 #         echo "skipped";;
 # esac
 
-# # backup current config files
-# mkdir $HOME/BACKUP
-# cp $HOME/.zprezto $HOME/.zlogin $HOME/.zlogout $HOME/.zpreztorc $HOME/.zprofile $HOME/.zshenv $HOME/.zshrc $HOME/BACKUP
-# rm -rf $HOME/.zprezto $HOME/.zlogin $HOME/.zlogout $HOME/.zpreztorc $HOME/.zprofile $HOME/.zshenv $HOME/.zshrc
+# backup current config files
+mkdir $HOME/BACKUP
+cp $HOME/.zprezto $HOME/.zlogin $HOME/.zlogout $HOME/.zpreztorc $HOME/.zprofile $HOME/.zshenv $HOME/.zshrc $HOME/BACKUP
+rm -rf $HOME/.zprezto $HOME/.zlogin $HOME/.zlogout $HOME/.zpreztorc $HOME/.zprofile $HOME/.zshenv $HOME/.zshrc
 
-# if [ -n "$(ls $HOME/BACKUP)" ]; then
-#     rm -rf $HOME/BACKUP
-# fi
+if [ -n "$(ls $HOME/BACKUP)" ]; then
+    rm -rf $HOME/BACKUP
+fi
 
-# # set ZDOTDIR
-# ZDOTDIR="$HOME/.dotfiles/zsh"
-# touch $HOME/.zshenv
-# echo "export ZDOTDIR=${ZDOTDIR}" >> $HOME/.zshenv
-# source $HOME/.zshenv
-# echo "source $ZDOTDIR/.zshenv" >> $HOME/.zshenv
+# set ZDOTDIR
+ZDOTDIR="$HOME/.dotfiles/zsh"
+touch $HOME/.zshenv
+echo "export ZDOTDIR=${ZDOTDIR}" >> $HOME/.zshenv
+source $HOME/.zshenv
+echo "source $ZDOTDIR/.zshenv" >> $HOME/.zshenv
 
 
-# # install prezto
-# git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-zsh
+# install prezto
+git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 setopt EXTENDED_GLOB
 for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
   ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
