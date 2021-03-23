@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 # # system info
 # sysname=$(uname -m)
@@ -44,18 +44,20 @@ fi
 # set ZDOTDIR
 ZDOTDIR="$HOME/.dotfiles/zsh"
 touch $HOME/.zshenv
-echo "export ZDOTDIR=${ZDOTDIR}" >> $HOME/.zshenv
+echo "export ZDOTDIR=${ZDOTDIR}" >>$HOME/.zshenv
 source $HOME/.zshenv
-echo "source $ZDOTDIR/.zshenv" >> $HOME/.zshenv
-
+echo "source $ZDOTDIR/.zshenv" >>$HOME/.zshenv
 
 # install prezto
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
-setopt EXTENDED_GLOB
-for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do
-  ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"
-done
+echo "please run following"
+echo "----------------------------------"
+echo "setopt EXTENDED_GLOB"
+echo "for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do"
+echo "ln -s \"$rcfile\" \"${ZDOTDIR:-$HOME}/.${rcfile:t}\""
+echo "done"
+echo "----------------------------------"
 
 # path for homebrew
-echo "export PATH=$PATH:$BREW_HOME/bin" >> $HOME/.dotfiles/zsh/.zshrc
-source $ZDOTDIR/.zshrc
+echo "export PATH=$PATH:$BREW_HOME/bin" >>$HOME/.dotfiles/zsh/.zshrc
+# source $ZDOTDIR/.zshrc
