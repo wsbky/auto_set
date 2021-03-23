@@ -52,10 +52,10 @@ echo "source $ZDOTDIR/.zshenv" >>$HOME/.zshenv
 git clone --recursive https://github.com/sorin-ionescu/prezto.git "${ZDOTDIR:-$HOME}/.zprezto"
 echo "please run following"
 echo "----------------------------------"
-echo "setopt EXTENDED_GLOB"
-echo "for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do"
-echo "ln -s \"$rcfile\" \"${ZDOTDIR:-$HOME}/.${rcfile:t}\""
-echo "done"
+echo 'setopt EXTENDED_GLOB'
+echo 'for rcfile in "${ZDOTDIR:-$HOME}"/.zprezto/runcoms/^README.md(.N); do'
+echo 'ln -s "$rcfile" "${ZDOTDIR:-$HOME}/.${rcfile:t}"'
+echo 'done'
 echo "----------------------------------"
 
 # path for homebrew
